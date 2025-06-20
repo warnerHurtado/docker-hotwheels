@@ -1,0 +1,49 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Git Semantic Version
+      uses: PaulHatch/semantic-version@v4.0.3
+      with:
+        major_pattern: "major:"
+        minor_pattern: "feat:"
+        format: "${major}.${minor}.${patch}-prerelease${increment}"
+        id: version
+
+    - name: Docker login
+      env: 
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        echo "Starting login"
+        docker login -u $DOCKER_USER -P $DOCKER_PASSWORD
+
+    - name: Build Docker Image
+      env: 
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+
+    #   run: |
+    #     echo "New version: $NEW_VERSION"
+    #     docker build -t warnerhurtado/hotwheels-backend:$NEW_VERSION .
+    #     docker build -t warnerhurtado/hotwheels-backend:latest .
+
+    # - name: Push Docker Image
+    #   run: |
+    #     docker push warnerhurtado/hotwheels-backend:$NEW_VERSION
+    #     docker push warnerhurtado/hotwheels-backend:latest
