@@ -43,6 +43,8 @@ jobs:
         docker build -t warnerhurtado/hotwheels-backend:latest .
 
     - name: Push Docker Image
+      env: 
+        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
         docker push warnerhurtado/hotwheels-backend:$NEW_VERSION
         docker push warnerhurtado/hotwheels-backend:latest
