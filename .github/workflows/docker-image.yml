@@ -40,7 +40,7 @@ jobs:
 
       run: |
         echo "New version: $NEW_VERSION"
-        docker build -t warnerhurtado/hotwheels-backend:$1.0.0 .
+        docker build -t warnerhurtado/hotwheels-backend:1.0.0 .
         docker build -t warnerhurtado/hotwheels-backend:latest .
 
     - name: Push Docker Image
