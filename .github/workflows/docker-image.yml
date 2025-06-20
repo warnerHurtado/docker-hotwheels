@@ -36,7 +36,7 @@ jobs:
 
     - name: Build Docker Image
       env: 
-        NEW_VERSION: ${{ steps.version.outputs.version }}
+        NEW_VERSION: ${{ steps.version }}
       run: |
         echo "New version: $NEW_VERSION"
         docker build -t warnerhurtado/hotwheels-backend:$NEW_VERSION .
