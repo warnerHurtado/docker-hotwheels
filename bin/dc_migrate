@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Starting DB migration for development DB"
+docker compose run --rm db rails db:migrate

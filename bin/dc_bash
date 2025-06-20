@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Starting bash in development mode"
+docker compose run --rm web bash
