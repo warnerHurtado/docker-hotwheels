@@ -8,7 +8,7 @@
 # STAGE 1: BASE IMAGE SETUP
 # ========================================
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.1.7
+ARG RUBY_VERSION=3.2.4
 # This AS is a STATE  that i will run for build
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
